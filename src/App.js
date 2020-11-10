@@ -82,17 +82,36 @@ class App extends Component {
         {/* <Nav clickPage={this.changePage} /> */}
         <Nav />
         <div className='content' aria-live='polite'>
-          {page === 'add' && (
+          {/* {page === 'add' && (
             <AddBookmark
               onAddBookmark={this.addBookmark}
               onClickCancel={() => this.changePage('list')}
             />
-          )}
-          {page === 'list' && (
+          )} */}
+          <Route 
+            path='/add-bookmark'
+            render={({ history }) => {
+              console.log(history)
+              return <AddBookmark 
+                onAddBookmark={this.addBookmark}
+                onClickCancel={() => history.push('/')}
+              />
+            }
+            }
+          />
+          {/* {page === 'list' && (
             <BookmarkList
               bookmarks={bookmarks}
             />
-          )}
+          )} */}
+          <Route 
+            exact
+            path='/'
+            render={() => 
+              <BookmarkList 
+                bookmarks={bookmarks}
+              />}
+          />
         </div>
       </main>
     );
